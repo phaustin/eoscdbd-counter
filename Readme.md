@@ -28,11 +28,12 @@ and rebuild the lock files with:
 Update your [version number](https://github.com/phaustin/eoscdbd-counter/blob/main/counter/__version__.py) and
 then:
 
-Kill the dash server and create a new environment, then restart:
+Kill the dash server, create a new environment, and restart:
 
     conda create --name db2 --file conda-osx-64.lock
     conda activate db2
     pip install -r requirements.txt
+    python -m counter.do_count
 
 and delete your old environment if you no longer need it:
 
@@ -52,3 +53,15 @@ The production dashboard will be running on locahost:8000
 ### To build and run the dev container:
 
     docker-compose up --build dev_count
+
+This will bring the server up in dev mode on localhost:8050.  The image is the same as for the `dev_prod` service but the local counter code is [bind mounted](https://github.com/phaustin/eoscdbd-counter/blob/main/docker-compose.yml#L22) in the
+container, so that local edits [do_count.py](https://github.com/phaustin/eoscdbd-counter/blob/main/counter/do_count.py)
+will show up when you stop and restart the service.
+
+## To do:
+
+### Setting up a github action to build the container
+
+- See the [pangeo example](https://github.com/pangeo-data/pangeo-docker-images/tree/master/.github/workflows)
+
+- Setting up the [dockerhub webhook](https://docs.docker.com/docker-hub/webhooks/)
