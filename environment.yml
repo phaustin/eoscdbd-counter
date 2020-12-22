@@ -1,0 +1,15 @@
+name: dbdev
+channels:
+  - eoas_ubc
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - importlib_resources
+  - dash
+  - pip
+  - gunicorn
+  - conda-lock
+# conda-lock -f environment.yml -p linux-64
+# conda-lock -f environment.yml -p win-64
+# conda-lock -f environment.yml -p osx-64

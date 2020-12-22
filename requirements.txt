@@ -1,0 +1,5 @@
+#
+# do an editable install for counter.do_count:server
+#
+dash-extensions
+-e .

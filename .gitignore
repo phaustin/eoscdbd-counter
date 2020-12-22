@@ -1,1 +1,8 @@
-*egg-info*
+_build
+.ipynb_checkpoints
+.DS_Store
+*.ipynb
+*.xlsx
+__pycache__
+.egg-info
+*egg*
