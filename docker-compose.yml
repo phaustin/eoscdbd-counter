@@ -1,29 +1,6 @@
 version: '3.8'
 
 services:
-  prod3:
-    build:
-      context: "."
-      dockerfile: threesig_image/Dockerfile
-    image: phaustin/sig3:dec21
-    container_name: sig3_dashboard_prod
-    command: [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "sig3.sig3:app"]
-    ports:
-        - "127.0.0.1:8500:8000"
-    networks:
-      - tests
-
-  dev3:
-    image: phaustin/sig3:dec21
-    container_name: sig3_dashboard_dev
-    volumes:
-     - "./src:/wd/src"
-    command: ["python","-m", "sig3.sig3"]
-    ports:
-        - "127.0.0.1:8550:8050"
-    networks:
-      - tests
-
   prod_count:
     build:
       context: "."

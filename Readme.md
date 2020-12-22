@@ -3,33 +3,52 @@
 
 ## local development using a conda environment
 
+There are three lockfiles corresponding to windows, mac or linux.  Use the appropriate lockfile
+for your operating system, e.g. for macs:
 
-    conda create --name db1 --file conda-linux-64.lock
+    conda create --name db1 --file conda-osx-64.lock
     conda activate db1
     pip install -r requirements.txt
     python -m counter.do_count
 
-This will start 
+This will start dash on localhost:8050 in dev mode.  The actual dashboard code is located at:
+[do_count.py](https://github.com/phaustin/eoscdbd-counter/blob/main/counter/do_count.py)
 
+### To modify your environment
 
+If you want to add a package to the environment, update a version, etc.,  edit
+the conda [environment.yml](https://github.com/phaustin/eoscdbd-counter/blob/main/environment.yml)
+and/or [requirements.txt](https://github.com/phaustin/eoscdbd-counter/blob/main/requirements.txt)
 
-Dashboard originally developed for ENVR 300 at UBC. Purpose is explore how signals, noise and slow trends affect abilities to learn about a simple artificial time series.
+and rebuild the lock files with:
 
-## How to run
-Dash is a library for making interactive applications that will run in a browser window. See https://dash.plotly.com/. We are using "Dash open-source" NOT Dash Enterprise. 
+    conda-lock -f environment.yml -p win-64
+    conda-lock -f environment.yml -p osx-64
 
-The graphics in our dashboards are produced using the plotly library. See https://plotly.com/python/
+Update your [version number](https://github.com/phaustin/eoscdbd-counter/blob/main/counter/__version__.py) and
+then:
 
-Python code is in the *.py files. They are commented - see top few lines for how to run them. These are NOT developed or run in Jupyter notebooks. That will come soon, but for now, the workflow and debugging is very efficient without notebooks.
+Kill the dash server and create a new environment, then restart:
 
-The dash packages do need installing via `pip install dash==1.18.1` (see [Dash installation](https://dash.plotly.com/installation)). 
+    conda create --name db2 --file conda-osx-64.lock
+    conda activate db2
+    pip install -r requirements.txt
 
-After installing, the necessary packages for running the codes are in the conda mini "base" environment. That means development can simply involve editing in a text editor and running with debugging on - achieved by including these as the last 2 lines of your code:
-```
-if __name__ == '__main__':
-    app.run_server(debug=True)
-```
+and delete your old environment if you no longer need it:
 
-Run the app from your terminal (in the directory with the *.py file) with `python app3.py`, then visit http://127.0.0.1:8050/ in your web browser. 
+    conda env remove -n db1
 
-End by closing the browser window and typing CTRL-C in your terminal. 
+## Building docker containers
+
+### To build and run the production container:
+
+     docker-compose up --build prod_count
+
+This will build a docker container using [this Dockerfile](https://github.com/phaustin/eoscdbd-counter/blob/main/counter_image/Dockerfile) using a version of the
+[Pangeo base image](https://github.com/phaustin/pangeo-docker-images/blob/dashboard/base-image/Dockerfile)
+
+The production dashboard will be running on locahost:8000
+
+### To build and run the dev container:
+
+    docker-compose up --build dev_count

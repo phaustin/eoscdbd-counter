@@ -8,6 +8,6 @@ dependencies:
   - importlib_resources
   - dash
   - pip
+  - gunicorn
   - conda-lock
-# conda-lock -f environment.yml -p win-64
-# conda-lock -f environment.yml -p osx-64
+# conda-lock -f environment_linux.yml -p linux-64

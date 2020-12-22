@@ -1,8 +1,6 @@
 # platform: linux-64
 # env_hash: 0e3ab84c6eef512fa8cb16356574b388617d296b6b75ed3be389f12fd259b9d3
-
 @EXPLICIT
-
 https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2#d7c89558ba9fa0495403155b64376d81
 https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2020.12.5-ha878542_0.tar.bz2#7eb5d4ffeee663caa1635cd67071bc1b
 https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.35.1-hea4e1c9_1.tar.bz2#cdabe198d509eeae33a9fc8741d7841d
